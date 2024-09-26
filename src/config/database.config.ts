@@ -1,6 +1,9 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { User } from '../user/entities/user.entity';
 import { Product } from '../product/entities/product.entity';
+import * as dotenv from 'dotenv';
+
+dotenv.config(); // Load environment variables
 
 export const databaseConfig: TypeOrmModuleOptions = {
   type: 'mysql',

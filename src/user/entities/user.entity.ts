@@ -6,6 +6,7 @@ import {
   UpdateDateColumn,
   OneToMany,
 } from 'typeorm';
+import { v4 as uuidv4 } from 'uuid';
 import { Product } from '../../product/entities/product.entity';
 
 export enum UserRole {
@@ -16,8 +17,8 @@ export enum UserRole {
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
-
+  id: string = uuidv4(); 
+  
   @Column()
   firstName: string;
 
