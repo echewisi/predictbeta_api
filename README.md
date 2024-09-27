@@ -1,85 +1,120 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# PredictBeta API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This is the backend API for the PredictBeta platform, built using NestJS, TypeORM, and MySQL. It provides authentication, user management, and product management functionalities.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Table of Contents
 
-## Description
+- [PredictBeta API](#predictbeta-api)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Installation](#installation)
+    - [Prerequisites](#prerequisites)
+    - [Clone the Repository](#clone-the-repository)
+    - [Install dependencies](#install-dependencies)
+  - [Configuration](#configuration)
+  - [Running the Application](#running-the-application)
+  - [API Endpoints](#api-endpoints)
+  - [Database Migrations](#database-migrations)
+  - [Testing](#testing)
+    - [End-to-End Testing](#end-to-end-testing)
+    - [Unit Testing](#unit-testing)
+  - [Technologies Used](#technologies-used)
+  - [Contributing](#contributing)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Features
 
-## Project setup
+- **Authentication**: User registration and login with JWT-based authentication.
+- **Role-based Access Control**: Admin and user roles for managing permissions.
+- **User Management**: CRUD operations for user profiles.
+- **Product Management**: CRUD operations for products with association to users.
+- **Database Migrations**: TypeORM migrations for managing database schema changes.
 
-```bash
-$ npm install
-```
+## Installation
 
-## Compile and run the project
+### Prerequisites
 
-```bash
-# development
-$ npm run start
+- [Node.js](https://nodejs.org/) (v14 or later)
+- [MySQL](https://www.mysql.com/) database
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Run tests
+### Clone the Repository
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+git clone https://github.com/yourusername/predictbeta-api.git
+cd predictbeta-api
 ```
 
-## Resources
+### Install dependencies
+```npm install```
 
-Check out a few resources that may come in handy when working with NestJS:
+## Configuration
+Create a ```.env``` file in the root directory and provide the following environment variables:
+```DB_HOST=localhost
+DB_PORT=3306
+DB_USER=root
+DB_PASSWORD=yourpassword
+DB_NAME= your db
+JWT_SECRET=your_jwt_secret
+```
+though this application runs in an environment facilitated by cloud variables that are already established and running.
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+## Running the Application
+```npm run start``` or watch mode:  ```npm run start:dev```
 
-## Support
+## API Endpoints
+**Authentication**
+*Register*: POST /auth/register
+Body: { "firstName": "John", "lastName": "Doe", "email": "john@example.com", "password": "password" }
+*Login*: POST /auth/login
+Body: { "email": "john@example.com", "password": "password" }
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+**User Management**
+*Get All Users*: GET /users (Admin only)
+*Get User by ID*: GET /users/:id
+*Update User*: PATCH /users/:id
+*Delete User*: DELETE /users/:id (Admin only)
 
-## Stay in touch
+**Product Management**
+*Create Product*: POST /products
+Body: { "name": "Product Name", "description": "Product Description", "price": 100.00 }
+*Get All Products*: GET /products
+*Get Product by ID*: GET /products/:id
+*Update Product*: PATCH /products/:id
+*Delete Product*: DELETE /products/:id (Admin only)
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## Database Migrations
+Generate a New Migration for user
+```npm migration:generate-user```
 
-## License
+Generate a New Migration for product
+```npm migration:generate-product```
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+run migrations
+```npm run migration:run
+```
+
+revert migrations
+```npm run migration:revert
+```
+
+## Testing
+### End-to-End Testing
+```npm run test:e2e```
+
+### Unit Testing
+```npm run test
+```
+
+
+## Technologies Used
+1. NestJS: A progressive Node.js framework for building efficient and scalable server-side applications.
+2. TypeORM: An ORM that runs in NodeJS and allows you to interact with your database using TypeScript.
+3. MySQL: A relational database management system used to store application data.
+4. Jest: A testing framework for JavaScript, providing unit and end-to-end testing capabilities.
+5. Supertest: An HTTP assertion library for testing Node.js HTTP servers.
+
+## Contributing
+1. Fork the repository.
+2. Create a new branch (git checkout -b feature-branch).
+3. Make your changes and commit them (git commit -m 'Add new feature').
+4. Push to the branch (git push origin feature-branch).
+5. Open a Pull Request.
